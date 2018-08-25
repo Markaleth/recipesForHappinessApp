@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "754758329663",
+    "firebase_url": "https://recipesforhappiness-e2c10.firebaseio.com",
+    "project_id": "recipesforhappiness-e2c10",
+    "storage_bucket": "recipesforhappiness-e2c10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754758329663:android:60345ab58191f5eb",
+        "android_client_info": {
+          "package_name": "com.vladgeorgescu.recipesforhappiness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754758329663-qa6e6ikcu59aagana8mh1tc8qr7cuho3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vladgeorgescu.recipesforhappiness",
+            "certificate_hash": "d4b8e5ef2324f3cdc9670bcc199a580b77dbedac"
+          }
+        },
+        {
+          "client_id": "754758329663-1q20njgc398qh2iit1603et9p9hrpajg.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "754758329663-1q20njgc398qh2iit1603et9p9hrpajg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBKae1UfjJyiG8Cg8U8Eh9HmPRi6ds3rY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754758329663-1q20njgc398qh2iit1603et9p9hrpajg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
