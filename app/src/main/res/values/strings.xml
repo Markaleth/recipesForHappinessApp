@@ -1,20 +1,15 @@
 <resources>
     <string name="app_name">Recipes for Happiness</string>
     <string name="landing_screen_text_view">Welcome to Recipes For Happiness!</string>
-    <string name="user_name">"What's your name chef?"</string>
     <string name="recipes_screen_label">My recipes </string>
-    <string name="online_recipes_screen_label">Internet recipes</string>
-    <string name="submit_button">"Let's start!"</string>
-    <string name="tab_one">"My creations"</string>
-    <string name="tab_two">"Internet inspiration"</string>
     <string name="add_new_recipe_creation">"Write down your latest creation"</string>
 
-    <string name="recipe_name_text_input_hint">"What's it called?"</string>
-    <string name="recipe_description_text_input_hint">"A short description for your recipe."</string>
-    <string name="ingredient_name_hint">"What ingredient?"</string>
-    <string name="ingredient_qty_hint">"How much of it?"</string>
-    <string name="instructions_hint">"Any special instructions?"</string>
-    <string name="timer_hint">"Cooking time?"</string>
+    <string name="recipe_name_text_input_hint">"Name you recipe. (Required)"</string>
+    <string name="recipe_url_text_input_hint">"Did you see this online? Add the URL here!"</string>
+    <string name="recipe_ingredients_text_input_hint">"Add your recipe's ingredients here.</string>
+    <string name="recipe_preparation_steps_text_input_hint">"Add your recipe's preparation steps here."</string>
+
+
     <string name="save_recipe_button_label">"Save recipe"</string>
 
     <string-array name="recipeNames">

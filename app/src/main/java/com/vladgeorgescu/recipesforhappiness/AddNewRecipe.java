@@ -5,6 +5,13 @@ import android.os.Bundle;
 
 public class AddNewRecipe extends AppCompatActivity {
 
+    private String recipeName;
+    private String recipeDescription;
+    private String recipeIngredients;
+    private String recipeSteps;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
