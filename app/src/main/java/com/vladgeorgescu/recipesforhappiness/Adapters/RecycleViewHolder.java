@@ -8,8 +8,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.R;
 
 /**
@@ -17,11 +20,7 @@ import com.vladgeorgescu.recipesforhappiness.R;
  */
 
 public class RecycleViewHolder extends RecyclerView.ViewHolder {
-    private FirebaseDatabase database;
-    private DatabaseReference mFirebaseReference;
-    private ChildEventListener mChildEventListener;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
     private TextView recipeName;
     ImageButton recipeImageButton;
 
@@ -38,15 +37,8 @@ public class RecycleViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         recipeName = itemView.findViewById(R.id.recipeName);
         recipeImageButton = itemView.findViewById(R.id.imageButton);
-
-
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myReference = database.getReference("recipe");
-
-        myReference.setValue("Hello world!");
-
-
     }
+
+
 }
 
