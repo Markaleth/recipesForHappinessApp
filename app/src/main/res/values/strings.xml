@@ -12,14 +12,9 @@
 
     <string name="save_recipe_button_label">"Save recipe"</string>
 
+    <!--Menu Options-->
+    <string name="sign_out_menu_option">"Sign Out"</string>
+
     <string-array name="recipeNames">
-    <item>Salam de biscuiti cu nuca</item>
-    <item>Tort de ciocolata cu visine</item>
-    <item>Ceva ce ii place irinei</item>
-    <item>Ceva ce ii place lu beby boo</item>
-    <item>Ceva ce ii place lu beby boo mai mult</item>
-    <item>Ceva ce ii place catalinei</item>
-    <item>Ceva ce ii place monicai</item>
-    <item>Efectiv cei mai buni cartofi prajiti din lume</item>
     </string-array>
 </resources>
