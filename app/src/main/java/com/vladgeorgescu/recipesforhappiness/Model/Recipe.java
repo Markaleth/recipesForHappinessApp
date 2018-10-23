@@ -1,6 +1,7 @@
 package com.vladgeorgescu.recipesforhappiness.Model;
 
-import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by vladadoreme on 26/02/2018.
@@ -10,11 +11,14 @@ public class Recipe {
 
     private String recipeName;
     private String recipeUrl;
-    private String recipeIngredients;
-    private String recipeSteps;
+    private List<String> recipeIngredients;
+    private List<String> recipeSteps;
 
+    public Recipe() {
 
-    public Recipe (String name, String url, String ingredients, String steps){
+    }
+
+    public Recipe(String name, String url, List<String> ingredients, List<String> steps) {
         this.recipeName = name;
         this.recipeUrl = url;
         this.recipeIngredients = ingredients;
@@ -37,19 +41,19 @@ public class Recipe {
         this.recipeUrl = recipeUrl;
     }
 
-    public String getRecipeIngredients() {
+    public List<String> getRecipeIngredients() {
         return recipeIngredients;
     }
 
-    public void setRecipeIngredients(String recipeIngredients) {
-        this.recipeIngredients = recipeIngredients;
+    public void setRecipeIngredients(String ingredient) {
+        this.recipeIngredients.add(ingredient);
     }
 
-    public String getRecipeSteps() {
+    public List<String> getRecipeSteps() {
         return recipeSteps;
     }
 
-    public void setRecipeSteps(String recipeSteps) {
-        this.recipeSteps = recipeSteps;
+    public void setRecipeSteps(String step) {
+        this.recipeSteps.add(step);
     }
 }

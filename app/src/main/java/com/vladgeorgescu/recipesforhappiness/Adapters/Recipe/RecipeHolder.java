@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.Adapters;
+package com.vladgeorgescu.recipesforhappiness.Adapters.Recipe;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,10 +19,10 @@ import com.vladgeorgescu.recipesforhappiness.R;
  * Created by vladadoreme on 26/02/2018.
  */
 
-public class RecycleViewHolder extends RecyclerView.ViewHolder {
+public class RecipeHolder extends RecyclerView.ViewHolder {
 
     private TextView recipeName;
-    ImageButton recipeImageButton;
+    private ImageButton recipeImageButton;
 
 
     public TextView getRecipeName() {
@@ -33,10 +33,10 @@ public class RecycleViewHolder extends RecyclerView.ViewHolder {
         return recipeImageButton;
     }
 
-    public RecycleViewHolder(View itemView) {
+    RecipeHolder(View itemView) {
         super(itemView);
         recipeName = itemView.findViewById(R.id.recipeName);
-        recipeImageButton = itemView.findViewById(R.id.imageButton);
+        recipeImageButton = itemView.findViewById(R.id.recipeImg);
     }
 
 
