@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorSecondary_Light"
-    tools:context="com.vladgeorgescu.recipesforhappiness.MyRecipes">
+    tools:context="com.vladgeorgescu.recipesforhappiness.MyRecipesActivity">
 
-    <!--suppress AndroidDomInspection -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_recipes_toolbar"
         android:layout_width="match_parent"
@@ -15,10 +14,10 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/recipes_screen_label" />
 
 

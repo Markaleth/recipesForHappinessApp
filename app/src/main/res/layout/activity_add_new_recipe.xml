@@ -2,44 +2,24 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/AddRecipeConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorSecondary_Light"
-    tools:context="com.vladgeorgescu.recipesforhappiness.AddNewRecipe">
+    tools:context="com.vladgeorgescu.recipesforhappiness.AddNewRecipeActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/recipe_toolbar"
-        style="@style/AppTheme"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/add_recipe_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
-        android:textAlignment="center"
-        android:theme="@style/Widget.AppCompat.ActionBar"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/name_and_url_card"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/add_new_recipe_creation" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/save_recipe_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:tint="@color/colorSecondary_Light"
-        app:backgroundTint="@color/colorSecondary"
-        app:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/fui_done_check_mark" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/name_and_url_card"
@@ -48,6 +28,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:visibility="visible"
         app:cardBackgroundColor="@color/colorPrimary_Light"
         app:cardCornerRadius="@dimen/browser_actions_context_menu_min_padding"
@@ -55,43 +36,98 @@
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="false"
         app:contentPadding="@dimen/fab_margin"
+        app:layout_constraintBottom_toTopOf="@+id/sections_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/add_recipe_toolbar"
+        tools:layout_conversion_absoluteHeight="106dp"
+        tools:layout_conversion_absoluteWidth="1dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/recipe_name_editText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:autofillHints="true"
                 android:hint="@string/recipe_name_text_input_hint"
                 android:inputType="text"
                 android:textAppearance="@style/TextAppearance.Design.Hint"
                 android:textColor="@color/colorPrimary_Dark"
                 android:textColorHint="@color/colorPrimary"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                tools:layout_conversion_absoluteHeight="37dp"
+                tools:layout_conversion_absoluteWidth="1dp"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="24dp" />
 
             <EditText
                 android:id="@+id/recipe_url_editText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:autofillHints="true"
                 android:hint="@string/recipe_url_text_input_hint"
                 android:inputType="text|textUri"
                 android:textAppearance="@style/TextAppearance.Design.Hint"
                 android:textColor="@color/colorPrimary_Dark"
                 android:textColorHint="@color/colorPrimary"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                tools:layout_conversion_absoluteHeight="37dp"
+                tools:layout_conversion_absoluteWidth="1dp"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="61dp" />
         </LinearLayout>
 
 
     </android.support.v7.widget.CardView>
+
+    <View
+        android:id="@+id/sections_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary_Dark"
+        app:layout_constraintBottom_toTopOf="@+id/steps_and_ingredients_tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_and_url_card" />
+
+    <View
+        android:id="@+id/sections_divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary_Dark"
+        app:layout_constraintBottom_toTopOf="@+id/save_recipe_fab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_view_pager" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_recipe_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:tint="@color/colorSecondary_Light"
+        app:backgroundTint="@color/colorSecondary"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/fui_done_check_mark"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/steps_and_ingredients_tab_layout"
@@ -100,9 +136,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tab_view_pager"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_and_url_card"
+        app:layout_constraintTop_toBottomOf="@+id/sections_divider"
         app:tabBackground="@color/colorPrimary"
         app:tabContentStart="4dp"
         app:tabIndicatorColor="@color/colorPrimary_Light"
@@ -117,15 +156,15 @@
 
         <android.support.design.widget.TabItem
             android:id="@+id/ingredientsTab"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/ingredients_tab_label" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/stepsTab"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/steps_tab_label" />
 
@@ -139,16 +178,24 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="55dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/sections_divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/steps_and_ingredients_tab_layout">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recipeDetailsRecyclerView"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recipeDetailsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+        </ScrollView>
+
     </android.support.v4.view.ViewPager>
 
 

@@ -7,7 +7,7 @@
     android:padding="8dp"
     app:cardBackgroundColor="@color/colorPrimary_Light"
     app:cardCornerRadius="@dimen/browser_actions_context_menu_min_padding"
-    app:cardElevation="@dimen/fui_auth_method_button_drawablePadding">
+    app:cardElevation="5dp">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

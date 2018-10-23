@@ -1,5 +1,6 @@
 package com.vladgeorgescu.recipesforhappiness.Adapters.Recipe;
 
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -22,21 +23,21 @@ import com.vladgeorgescu.recipesforhappiness.R;
 public class RecipeHolder extends RecyclerView.ViewHolder {
 
     private TextView recipeName;
-    private ImageButton recipeImageButton;
+    private ImageView recipeImage;
 
 
     public TextView getRecipeName() {
         return recipeName;
     }
 
-    public ImageButton getRecipeImageButton() {
-        return recipeImageButton;
+    public ImageView getRecipeImageButton() {
+        return recipeImage;
     }
 
     RecipeHolder(View itemView) {
         super(itemView);
         recipeName = itemView.findViewById(R.id.recipeName);
-        recipeImageButton = itemView.findViewById(R.id.recipeImg);
+        recipeImage = itemView.findViewById(R.id.recipeImg);
     }
 
 

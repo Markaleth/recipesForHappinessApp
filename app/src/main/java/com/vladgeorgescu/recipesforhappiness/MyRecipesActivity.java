@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,7 +33,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MyRecipes extends AppCompatActivity {
+public class MyRecipesActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     public static final int RC_SIGN_IN = 1;
@@ -42,6 +43,7 @@ public class MyRecipes extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Recipe> recipeList;
     public static final String ANONYMOUS = "anonymous";
+    Toolbar myRecipiesToolbar;
 
 
     //Firebase instance variables
@@ -58,7 +60,9 @@ public class MyRecipes extends AppCompatActivity {
         setContentView(R.layout.activity_my_recipes);
         ButterKnife.bind(this);
         recyclerView = findViewById(R.id.recipe_recyclerView);
-        mUsername = ANONYMOUS;
+
+        myRecipiesToolbar = findViewById(R.id.my_recipes_toolbar);
+        setSupportActionBar(myRecipiesToolbar);
 
         //Firebase variable initialisation
         database = FirebaseDatabase.getInstance();
@@ -68,7 +72,7 @@ public class MyRecipes extends AppCompatActivity {
         recyclerViewAdapter = new RecyclerViewAdapter(this, recipeList);
         RecyclerView.LayoutManager recycler = new LinearLayoutManager(this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(MyRecipes.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(MyRecipesActivity.this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(recyclerViewAdapter);
 
@@ -90,7 +94,7 @@ public class MyRecipes extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(MyRecipes.this, "Oops! We ran into some problems retrieving your recipes! Please try again later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyRecipesActivity.this, "Oops! We ran into some problems retrieving your recipes! Please try again later!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -175,7 +179,7 @@ public class MyRecipes extends AppCompatActivity {
 
     @OnClick(R.id.floatingActionButtonMyCreationsTab)
     public void addNewRecipe() {
-        Intent intent = new Intent(this, AddNewRecipe.class);
+        Intent intent = new Intent(this, AddNewRecipeActivity.class);
         startActivity(intent);
 
     }

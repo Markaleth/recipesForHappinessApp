@@ -27,51 +27,39 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class AddNewRecipe extends AppCompatActivity {
+public class AddNewRecipeActivity extends AppCompatActivity {
 
     private EditText recipeNameTextView;
     private EditText recipeUrlTextView;
-    private EditText recipeIngredientsTextView;
-    private EditText recipeStepsTextView;
-    private RecyclerView recyclerView;
     private FloatingActionButton saveNewRecipeFab;
     private List<Recipe> recipeIngredientsList;
-    private CardView addIngredientsCard;
-    private CardView addStepsCard;
     private TabLayout stepsAndIngredientsTabLayout;
     private ViewPager tabViewPager;
-
-    private FirebaseAuth mAuth;
+    private Toolbar addRecipeToolbar;
     private FirebaseDatabase database;
     private DatabaseReference mFirebaseReference;
     private ChildEventListener mChildEventListener;
-    private Toolbar addRecipeToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_recipe);
+
         ButterKnife.bind(this);
 
+        initiateToolbar();
         //View objects instance variables
-        saveNewRecipeFab = findViewById(R.id.save_recipe_fab);
+
         recipeNameTextView = findViewById(R.id.recipe_name_editText);
         recipeUrlTextView = findViewById(R.id.recipe_url_editText);
-        recyclerView = findViewById(R.id.ingredients_recyclerView);
-        recipeIngredientsTextView = findViewById(R.id.ingredientName);
-
-
-        addRecipeToolbar = findViewById(R.id.recipe_toolbar);
-        addIngredientsCard = findViewById(R.id.addIngredientCardView);
-        addStepsCard = findViewById(R.id.addStepCardView);
-        setSupportActionBar(addRecipeToolbar);
-        saveNewRecipeFab.setEnabled(false);
 
         //Initialize Firebase objects
         database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
         mFirebaseReference = database.getReference().child("recipe");
 
+        //FAB instantiation
+        saveNewRecipeFab = findViewById(R.id.save_recipe_fab);
+        saveNewRecipeFab.setEnabled(false);
         saveNewRecipeFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +123,15 @@ public class AddNewRecipe extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+    }
 
-
+    private void initiateToolbar() {
+        addRecipeToolbar = (Toolbar) findViewById(R.id.add_recipe_toolbar);
+        if (getSupportActionBar() == null) {
+            setSupportActionBar(addRecipeToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 }
