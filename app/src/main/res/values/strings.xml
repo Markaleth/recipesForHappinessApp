@@ -2,11 +2,12 @@
     <string name="app_name">Recipes for Happiness</string>
     <string name="landing_screen_text_view">Welcome to Recipes For Happiness!</string>
     <string name="recipes_screen_label">My recipes </string>
-    <string name="add_new_recipe_creation">"Write down your latest creation"</string>
+    <string name="add_new_recipe_creation">"Add a new recipe"</string>
 
     <string name="recipe_name_text_input_hint">"Name you recipe. (Required)"</string>
     <string name="recipe_url_text_input_hint">"Did you see this online? Add the URL here!"</string>
     <string name="recipe_ingredients_text_input_hint">"Add your recipe's ingredients here.</string>
+    <string name="recipe_steps_text_input_hint">"Add your preparation steps here.</string>
     <string name="recipe_preparation_steps_text_input_hint">"Add your recipe's preparation steps here."</string>
 
 
@@ -14,6 +15,9 @@
 
     <!--Menu Options-->
     <string name="sign_out_menu_option">"Sign Out"</string>
+    <string name="save_recipe">Save</string>
+    <string name="ingredients_tab_label">Ingredients</string>
+    <string name="steps_tab_label">Recipe Steps</string>
 
     <string-array name="recipeNames">
     </string-array>

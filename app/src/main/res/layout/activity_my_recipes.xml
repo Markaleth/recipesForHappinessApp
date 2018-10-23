@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSecondary_Light"
     tools:context="com.vladgeorgescu.recipesforhappiness.MyRecipes">
 
     <!--suppress AndroidDomInspection -->
     <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/my_recipes_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,15 +33,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/my_recipes_toolbar" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonMyCreationsTab"
-        style="@style/floating_button_style"
-        android:src="@drawable/add_new_recipes_icon"
-        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/add_new_recipes_icon"
+        android:tint="@color/textColorSecondary"
+        android:visibility="visible"
+        app:backgroundTint="@color/colorSecondary"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:useCompatPadding="false" />
 
 </android.support.constraint.ConstraintLayout>
