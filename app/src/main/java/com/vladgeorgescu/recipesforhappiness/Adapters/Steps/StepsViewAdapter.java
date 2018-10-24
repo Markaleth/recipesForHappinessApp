@@ -26,7 +26,7 @@ public class StepsViewAdapter extends RecyclerView.Adapter<StepsHolder> {
     @NonNull
     @Override
     public StepsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View addNewRecipe = LayoutInflater.from(stepsRecyclerViewContext).inflate(R.layout.step_tab_fragment, parent, false);
+        View addNewRecipe = LayoutInflater.from(stepsRecyclerViewContext).inflate(R.layout.step_row, parent, false);
 
         return new StepsHolder(addNewRecipe);
     }

@@ -16,8 +16,8 @@
     <!--Menu Options-->
     <string name="sign_out_menu_option">"Sign Out"</string>
     <string name="save_recipe">Save</string>
-    <string name="ingredients_tab_label">Ingredients</string>
-    <string name="steps_tab_label">Recipe Steps</string>
+    <string name="ingredients_label">Ingredients</string>
+    <string name="steps_label">Steps</string>
 
     <string-array name="recipeNames">
     </string-array>

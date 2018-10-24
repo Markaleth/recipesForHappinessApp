@@ -1,6 +1,6 @@
 package com.vladgeorgescu.recipesforhappiness.Model;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,16 +14,18 @@ public class Recipe {
     private List<String> recipeIngredients;
     private List<String> recipeSteps;
 
-    public Recipe() {
+    public Recipe(){
 
     }
 
-    public Recipe(String name, String url, List<String> ingredients, List<String> steps) {
+    public Recipe(String name, String url, ArrayList<String> ingredients, ArrayList<String> steps) {
         this.recipeName = name;
         this.recipeUrl = url;
         this.recipeIngredients = ingredients;
         this.recipeSteps = steps;
     }
+
+    private static int lastRecipeId = 0;
 
     public String getRecipeName() {
         return recipeName;
@@ -45,15 +47,19 @@ public class Recipe {
         return recipeIngredients;
     }
 
-    public void setRecipeIngredients(String ingredient) {
+    public List<String> setRecipeIngredients(String ingredient) {
         this.recipeIngredients.add(ingredient);
+        return recipeIngredients;
     }
 
     public List<String> getRecipeSteps() {
         return recipeSteps;
     }
 
-    public void setRecipeSteps(String step) {
+    public List<String> setRecipeSteps(String step) {
         this.recipeSteps.add(step);
+        return recipeSteps;
+
     }
 }
+

@@ -2,40 +2,64 @@ package com.vladgeorgescu.recipesforhappiness;
 
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.common.util.Strings;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.vladgeorgescu.recipesforhappiness.Adapters.TabPageAdapter.TabPageAdapter;
+import com.vladgeorgescu.recipesforhappiness.Adapters.Ingredients.IngredientsViewAdapter;
+import com.vladgeorgescu.recipesforhappiness.Adapters.Recipe.RecyclerViewAdapter;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AddNewRecipeActivity extends AppCompatActivity {
 
-    private EditText recipeNameTextView;
-    private EditText recipeUrlTextView;
-    private FloatingActionButton saveNewRecipeFab;
-    private List<Recipe> recipeIngredientsList;
-    private TabLayout stepsAndIngredientsTabLayout;
-    private ViewPager tabViewPager;
-    private Toolbar addRecipeToolbar;
+    @BindView(R.id.name_and_url_card)
+    CardView nameAndUrlCardView;
+    @BindView(R.id.recipe_name_editText)
+    EditText recipeNameTextView;
+    @BindView(R.id.recipe_url_editText)
+    EditText recipeUrlTextView;
+    @BindView(R.id.save_recipe_fab)
+    FloatingActionButton saveNewRecipeFab;
+    @BindView(R.id.stepsContainer)
+    LinearLayout stepsLayout;
+    @BindView(R.id.ingredientsContainer)
+    LinearLayout ingredientsLayout;
+    @BindView(R.id.stepsRecyclerView)
+    RecyclerView stepsRecyclerView;
+    @BindView(R.id.ingredientsRecyclerView)
+    RecyclerView ingredientsRecyclerView;
+    @BindView(R.id.stepsContainerLabel)
+    TextView stepsContainerLable;
+    @BindView(R.id.ingrediensContainerLabel)
+    TextView ingredientsContainerLable;
+    @BindView(R.id.add_recipe_toolbar)
+    Toolbar addRecipeToolbar;
+    private RecyclerViewAdapter stepsRecyclerViewAdapter;
+    private RecyclerView.Adapter ingredientsRecyclerViewAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Recipe> recipes;
+    private Recipe recipe;
+    private List<String> recipeIngredients;
+    private List<String> recipeSteps;
     private FirebaseDatabase database;
     private DatabaseReference mFirebaseReference;
     private ChildEventListener mChildEventListener;
@@ -47,11 +71,8 @@ public class AddNewRecipeActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        initiateToolbar();
-        //View objects instance variables
 
-        recipeNameTextView = findViewById(R.id.recipe_name_editText);
-        recipeUrlTextView = findViewById(R.id.recipe_url_editText);
+        initiateToolbar();
 
         //Initialize Firebase objects
         database = FirebaseDatabase.getInstance();
@@ -75,30 +96,10 @@ public class AddNewRecipeActivity extends AppCompatActivity {
 
         });
 
-        stepsAndIngredientsTabLayout = findViewById(R.id.steps_and_ingredients_tab_layout);
-        tabViewPager = findViewById(R.id.tab_view_pager);
-        tabViewPager.setAdapter(new TabPageAdapter(getSupportFragmentManager()));
-        stepsAndIngredientsTabLayout.setupWithViewPager(tabViewPager);
+        ingredientsRecyclerViewAdapter = new IngredientsViewAdapter();
+        ingredientsRecyclerView.setAdapter(ingredientsRecyclerViewAdapter);
+        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        stepsAndIngredientsTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
-
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tabViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
 
         recipeNameTextView.addTextChangedListener(new TextWatcher() {
             @Override
