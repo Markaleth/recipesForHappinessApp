@@ -22,8 +22,10 @@ public class IngredientsHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.addIngredientFab)
     FloatingActionButton addMoreIngredients;
 
-    IngredientsHolder(View itemView) {
+    public IngredientsHolder(View itemView) {
         super(itemView);
+        ingredientNameTextField = itemView.findViewById(R.id.ingredientName);
+        addMoreIngredients = itemView.findViewById(R.id.addIngredientFab);
     }
 
     CardView getAddIngredientCard() {

@@ -22,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.vladgeorgescu.recipesforhappiness.Adapters.Ingredients.IngredientsViewAdapter;
 import com.vladgeorgescu.recipesforhappiness.Adapters.Recipe.RecyclerViewAdapter;
+import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
+import com.vladgeorgescu.recipesforhappiness.Model.Step;
 
 import java.util.List;
 
@@ -58,8 +60,8 @@ public class AddNewRecipeActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private List<Recipe> recipes;
     private Recipe recipe;
-    private List<String> recipeIngredients;
-    private List<String> recipeSteps;
+    private List<Ingredient> recipeIngredients;
+    private List<Step> recipeSteps;
     private FirebaseDatabase database;
     private DatabaseReference mFirebaseReference;
     private ChildEventListener mChildEventListener;
@@ -96,9 +98,10 @@ public class AddNewRecipeActivity extends AppCompatActivity {
 
         });
 
-        ingredientsRecyclerViewAdapter = new IngredientsViewAdapter();
+
+        ingredientsRecyclerViewAdapter = new IngredientsViewAdapter(this, recipeIngredients);
+        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(AddNewRecipeActivity.this));
         ingredientsRecyclerView.setAdapter(ingredientsRecyclerViewAdapter);
-        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
         recipeNameTextView.addTextChangedListener(new TextWatcher() {

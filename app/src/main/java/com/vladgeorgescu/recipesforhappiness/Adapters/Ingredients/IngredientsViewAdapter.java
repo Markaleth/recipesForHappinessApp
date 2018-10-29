@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.R;
 
@@ -19,14 +20,21 @@ import java.util.List;
 public class IngredientsViewAdapter extends RecyclerView.Adapter<IngredientsHolder> {
 
 
-    private List<String> ingredients;
-    private List<String> recipeIngredients;
-    private Recipe recipe;
+    private List<Ingredient> ingredients;
+    private Ingredient ingredient;
+    Context context;
+
+    public IngredientsViewAdapter(Context context, List<Ingredient> ingredients){
+        this.context = context;
+        this.ingredients = ingredients;
+    }
 
 
     @NonNull
     @Override
     public IngredientsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ingredient = new Ingredient();
+        ingredients.add(ingredient);
         CardView addNewRecipe = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.ingredient_row, parent, false);
 
         return new IngredientsHolder(addNewRecipe);
@@ -34,7 +42,7 @@ public class IngredientsViewAdapter extends RecyclerView.Adapter<IngredientsHold
 
     @Override
     public void onBindViewHolder(@NonNull IngredientsHolder holder, int position) {
-        recipe.getRecipeIngredients().get(position);
+        Ingredient ingredient = ingredients.get(position);
 //        Populate cards with whatever element you want from the model
         holder.addIngredientCard.setVisibility(View.VISIBLE);
     }
