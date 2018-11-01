@@ -16,16 +16,18 @@ import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.common.util.Strings;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.vladgeorgescu.recipesforhappiness.Adapters.Ingredients.IngredientsViewAdapter;
+import com.google.firebase.internal.FirebaseAppHelper;
+import com.vladgeorgescu.recipesforhappiness.Adapters.Ingredient.IngredientViewAdapter;
 import com.vladgeorgescu.recipesforhappiness.Adapters.Recipe.RecyclerViewAdapter;
+import com.vladgeorgescu.recipesforhappiness.Adapters.Step.StepViewAdapter;
 import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.Model.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,16 +57,17 @@ public class AddNewRecipeActivity extends AppCompatActivity {
     TextView ingredientsContainerLable;
     @BindView(R.id.add_recipe_toolbar)
     Toolbar addRecipeToolbar;
-    private RecyclerViewAdapter stepsRecyclerViewAdapter;
+    private RecyclerView.Adapter stepsRecyclerViewAdapter;
     private RecyclerView.Adapter ingredientsRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Recipe> recipes;
     private Recipe recipe;
-    private List<Ingredient> recipeIngredients;
-    private List<Step> recipeSteps;
+    private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
+    private ArrayList<Step> recipeSteps = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference mFirebaseReference;
     private ChildEventListener mChildEventListener;
+    private FirebaseAppHelper firebaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +78,21 @@ public class AddNewRecipeActivity extends AppCompatActivity {
 
 
         initiateToolbar();
+        ingredientAndStepListsInit();
 
         //Initialize Firebase objects
         database = FirebaseDatabase.getInstance();
         mFirebaseReference = database.getReference().child("recipe");
+
+        ingredientsRecyclerViewAdapter = new IngredientViewAdapter(recipeIngredients, this);
+        ingredientsRecyclerView.setAdapter(ingredientsRecyclerViewAdapter);
+        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        stepsRecyclerViewAdapter = new StepViewAdapter(recipeSteps, this);
+        stepsRecyclerView.setAdapter(stepsRecyclerViewAdapter);
+        stepsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         //FAB instantiation
         saveNewRecipeFab = findViewById(R.id.save_recipe_fab);
@@ -87,8 +101,12 @@ public class AddNewRecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Recipe recipe = new Recipe();
+
                 recipe.setRecipeName(recipeNameTextView.getText().toString());
                 recipe.setRecipeUrl(recipeUrlTextView.getText().toString());
+
+//                recipe.setRecipeIngredients(ingredientsRecyclerViewAdapter.getIngredientArrayList())
+
                 mFirebaseReference.push().setValue(recipe);
 
 //                Clear input text
@@ -97,12 +115,6 @@ public class AddNewRecipeActivity extends AppCompatActivity {
             }
 
         });
-
-
-        ingredientsRecyclerViewAdapter = new IngredientsViewAdapter(this, recipeIngredients);
-        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(AddNewRecipeActivity.this));
-        ingredientsRecyclerView.setAdapter(ingredientsRecyclerViewAdapter);
-
 
         recipeNameTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -137,5 +149,11 @@ public class AddNewRecipeActivity extends AppCompatActivity {
         } else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    private void ingredientAndStepListsInit() {
+        recipeIngredients.add(new Ingredient("", ""));
+        recipeSteps.add(new Step(""));
+
     }
 }

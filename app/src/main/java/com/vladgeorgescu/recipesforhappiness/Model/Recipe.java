@@ -11,18 +11,10 @@ public class Recipe {
 
     private String recipeName;
     private String recipeUrl;
-    private ArrayList<Ingredient> recipeIngredients;
-    private ArrayList<Step> recipeSteps;
+    private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
+    private ArrayList<Step> recipeSteps = new ArrayList<>();
 
     public Recipe(){
-
-    }
-
-    public Recipe(String name, String url, ArrayList<Ingredient> ingredients, ArrayList<Step> steps) {
-        this.recipeName = name;
-        this.recipeUrl = url;
-        this.recipeIngredients = ingredients;
-        this.recipeSteps = steps;
     }
 
     private static int lastRecipeId = 0;
@@ -60,7 +52,5 @@ public class Recipe {
         this.recipeSteps.add(step);
         return recipeSteps;
     }
-
-
 }
 

@@ -4,8 +4,8 @@ public class Step {
 
     private String description;
 
-    public Step(){
-
+    public Step(String description){
+        this.description = description;
     }
 
     public String getDescription() {
