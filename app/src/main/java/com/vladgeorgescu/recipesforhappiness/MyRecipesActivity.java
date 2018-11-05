@@ -1,13 +1,16 @@
 package com.vladgeorgescu.recipesforhappiness;
 
 import android.content.Intent;
+
+
+import android.os.Bundle;
+
+
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,10 +23,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vladgeorgescu.recipesforhappiness.Adapters.Recipe.RecyclerViewAdapter;
+import com.vladgeorgescu.recipesforhappiness.FirebaseUtils.FirebaseHandler;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 
 import java.util.ArrayList;
@@ -44,14 +46,10 @@ public class MyRecipesActivity extends AppCompatActivity {
     List<Recipe> recipeList;
     public static final String ANONYMOUS = "anonymous";
     Toolbar myRecipiesToolbar;
+    FirebaseHandler firebaseHandler;
 
 
     //Firebase instance variables
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private ChildEventListener mChildEventListener;
-    private DatabaseReference mFirebaseReference;
-    private FirebaseDatabase database;
 
 
     @Override
@@ -65,9 +63,7 @@ public class MyRecipesActivity extends AppCompatActivity {
         setSupportActionBar(myRecipiesToolbar);
 
         //Firebase variable initialisation
-        database = FirebaseDatabase.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseReference = database.getReference().child("recipe");
+        firebaseHandler = new FirebaseHandler();
 
         recyclerViewAdapter = new RecyclerViewAdapter(this, recipeList);
         RecyclerView.LayoutManager recycler = new LinearLayoutManager(this);
@@ -77,7 +73,7 @@ public class MyRecipesActivity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerViewAdapter);
 
 
-        mFirebaseReference.addValueEventListener(new ValueEventListener() {
+        firebaseHandler.getFirebaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 recipeList = new ArrayList<>();
@@ -98,8 +94,7 @@ public class MyRecipesActivity extends AppCompatActivity {
             }
         });
 
-
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+        firebaseHandler.setFirebaseAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -120,7 +115,7 @@ public class MyRecipesActivity extends AppCompatActivity {
                             RC_SIGN_IN);
                 }
             }
-        };
+        });
     }
 
     @Override
@@ -137,11 +132,10 @@ public class MyRecipesActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        firebaseHandler.getFirebaseAuth().addAuthStateListener(firebaseHandler.getFirebaseAuthStateListener());
         recyclerViewAdapter = new RecyclerViewAdapter(this, recipeList);
         RecyclerView.LayoutManager recycler = new LinearLayoutManager(this);
 
@@ -153,8 +147,8 @@ public class MyRecipesActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (mAuthStateListener != null) {
-            mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        if (firebaseHandler.getFirebaseAuthStateListener() != null) {
+            firebaseHandler.getFirebaseAuth().removeAuthStateListener(firebaseHandler.getFirebaseAuthStateListener());
         }
         detachDatabaseReadListener();
     }
@@ -163,7 +157,7 @@ public class MyRecipesActivity extends AppCompatActivity {
     private void onSignInInitialize(String username) {
         mUsername = username;
         attachDatabaseReadListener();
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        firebaseHandler.getFirebaseAuth().addAuthStateListener(firebaseHandler.getFirebaseAuthStateListener());
         recyclerViewAdapter = new RecyclerViewAdapter(this, recipeList);
         RecyclerView.LayoutManager recycler = new LinearLayoutManager(this);
 
@@ -181,13 +175,12 @@ public class MyRecipesActivity extends AppCompatActivity {
     public void addNewRecipe() {
         Intent intent = new Intent(this, AddNewRecipeActivity.class);
         startActivity(intent);
-
     }
 
     protected void attachDatabaseReadListener() {
 
-        if (mChildEventListener == null) {
-            mChildEventListener = new ChildEventListener() {
+        if (firebaseHandler.getFirebaseChildEventListener() == null) {
+            firebaseHandler.setFirebaseChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
@@ -209,9 +202,8 @@ public class MyRecipesActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
-            };
-
-            mFirebaseReference.addChildEventListener(mChildEventListener);
+            });
+            firebaseHandler.getFirebaseReference().addChildEventListener(firebaseHandler.getFirebaseChildEventListener());
         }
 
     }
@@ -225,7 +217,7 @@ public class MyRecipesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.sign_out_menu:
                 AuthUI.getInstance().signOut(this);
                 return true;
@@ -235,10 +227,9 @@ public class MyRecipesActivity extends AppCompatActivity {
     }
 
     protected void detachDatabaseReadListener() {
-
-        if (mChildEventListener != null) {
-            mFirebaseReference.removeEventListener(mChildEventListener);
-            mChildEventListener = null;
+        if (firebaseHandler.getFirebaseChildEventListener() != null) {
+            firebaseHandler.getFirebaseReference().removeEventListener(firebaseHandler.getFirebaseChildEventListener());
+            firebaseHandler.setFirebaseChildEventListener(null);
         }
 
     }
