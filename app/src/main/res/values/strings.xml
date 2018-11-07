@@ -18,6 +18,7 @@
     <string name="save_recipe">Save</string>
     <string name="ingredients_label">Ingredients</string>
     <string name="steps_label">Steps</string>
+    <string name="recipe_name">Recipe name</string>
 
     <string-array name="recipeNames">
     </string-array>
