@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 
-import com.vladgeorgescu.recipesforhappiness.R;
-
 public class StepHolder extends RecyclerView.ViewHolder {
 
     private CardView stepCard;
@@ -17,9 +15,9 @@ public class StepHolder extends RecyclerView.ViewHolder {
 
     public StepHolder(@NonNull View itemView) {
         super(itemView);
-        stepCard = itemView.findViewById(R.id.addStepCardView);
-        stepName = itemView.findViewById(R.id.ingredientName);
-        addAdditionalStep = itemView.findViewById(R.id.addStepFab);
+//        stepCard = itemView.findViewById(R.id.addStepCardView);
+//        stepName = itemView.findViewById(R.id.ingredientName);
+//        addAdditionalStep = itemView.findViewById(R.id.addStepFab);
 
     }
 

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.airbnb.epoxy.EpoxyRecyclerView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.internal.FirebaseAppHelper;
+import com.vladgeorgescu.recipesforhappiness.Epoxy.AdapterCallbacks;
 import com.vladgeorgescu.recipesforhappiness.Epoxy.AddNewRecipeController;
 import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
@@ -22,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddNewRecipeActivity extends AppCompatActivity {
+public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCallbacks {
 
 
     @BindView(R.id.add_recipe_toolbar)
@@ -30,7 +32,7 @@ public class AddNewRecipeActivity extends AppCompatActivity {
     @BindView(R.id.add_new_recipe_recyclerView)
     EpoxyRecyclerView addRecipeRecyclerView;
 
-    private AddNewRecipeController addNewRecipeController= new AddNewRecipeController();
+    private AddNewRecipeController addNewRecipeController = new AddNewRecipeController(this);
 
     private List<Recipe> recipes;
     private Recipe recipe;
@@ -52,9 +54,11 @@ public class AddNewRecipeActivity extends AppCompatActivity {
 
 
         initiateToolbar();
-        ingredientAndStepListsInit();
+        ingredientsAndStepsInit();
+        updateController();
+
         addRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        addRecipeRecyclerView.setControllerAndBuildModels(addNewRecipeController);
+        addRecipeRecyclerView.setController(addNewRecipeController);
 
         //Initialize Firebase objects
         database = FirebaseDatabase.getInstance();
@@ -71,9 +75,29 @@ public class AddNewRecipeActivity extends AppCompatActivity {
         }
     }
 
-    private void ingredientAndStepListsInit() {
-        recipeIngredients.add(new Ingredient("", ""));
-        recipeSteps.add(new Step(""));
+    @Override
+    public void onAddIngredient() {
+//        this.recipeIngredients.add(new Ingredient(null));
+        this.recipe.setRecipeIngredients(new Ingredient(null));
+        updateController();
+        Toast.makeText(this, "Add new ingredient button clicked!", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onAddStep() {
+        this.recipeSteps.add(new Step(null));
+        updateController();
+        Toast.makeText(this, "Add new step button clicked!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateController() {
+        addNewRecipeController.setData(this.recipe);
+
+    }
+
+    public void ingredientsAndStepsInit() {
+        this.recipe = new Recipe();
+        this.recipe.setRecipeIngredients(new Ingredient(null));
+        this.recipe.setRecipeSteps(new Step(null));
     }
 }

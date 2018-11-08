@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 
-import com.vladgeorgescu.recipesforhappiness.R;
-
 public class IngredientHolder extends RecyclerView.ViewHolder {
 
     private CardView ingredientCard;
@@ -17,9 +15,9 @@ public class IngredientHolder extends RecyclerView.ViewHolder {
 
     public IngredientHolder(@NonNull View itemView) {
         super(itemView);
-        ingredientCard = itemView.findViewById(R.id.addIngredientCardView);
-        ingredientName = itemView.findViewById(R.id.ingredientName);
-        addAdditionalIngredient = itemView.findViewById(R.id.addIngredientFab);
+//        ingredientCard = itemView.findViewById(R.id.addIngredientCardView);
+//        ingredientName = itemView.findViewById(R.id.ingredientName);
+//        addAdditionalIngredient = itemView.findViewById(R.id.addIngredientFab);
 
     }
 

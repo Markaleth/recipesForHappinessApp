@@ -5,9 +5,8 @@ public class Ingredient {
     private String name;
     private String quantity;
 
-    public Ingredient(String name, String quantity){
+    public Ingredient(String name){
         this.name = name;
-        this.quantity = quantity;
     }
 
 

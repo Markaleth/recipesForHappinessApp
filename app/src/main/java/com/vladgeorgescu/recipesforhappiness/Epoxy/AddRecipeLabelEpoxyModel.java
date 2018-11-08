@@ -1,28 +1,28 @@
 package com.vladgeorgescu.recipesforhappiness.Epoxy;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.widget.TextView;
 
+import com.airbnb.epoxy.EpoxyAttribute;
 import com.airbnb.epoxy.EpoxyModelClass;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.vladgeorgescu.recipesforhappiness.R;
 
 import butterknife.BindView;
 
-@EpoxyModelClass(layout = R.layout.add_new_recipe_header_label)
+@EpoxyModelClass(layout = R.layout.add_recipe_form_label)
 public class AddRecipeLabelEpoxyModel extends EpoxyModelWithHolder<AddRecipeLabelEpoxyModel.AddRecipeLabelHolder> {
 
-    private int spanSize;
-    private String labelText;
+    @EpoxyAttribute
+    @StringRes
+    int labelText;
 
     @Override
     protected AddRecipeLabelHolder createNewHolder() {
         return new AddRecipeLabelHolder();
     }
 
-    public void setLabelText(String labelText) {
-        this.labelText = labelText;
-    }
 
     @Override
     public void bind(@NonNull AddRecipeLabelHolder holder) {
@@ -32,18 +32,13 @@ public class AddRecipeLabelEpoxyModel extends EpoxyModelWithHolder<AddRecipeLabe
     }
 
     @Override
-    public int getSpanSize(int totalSpanCount, int position, int itemCount) {
-        return spanSize;
-    }
-
-    @Override
     protected int getDefaultLayout() {
-        return R.layout.add_new_recipe_header_label;
+        return R.layout.add_recipe_form_label;
     }
 
 
     class AddRecipeLabelHolder extends BaseEpoxyHolder {
-        @BindView(R.id.addRecipeHeaderLabel)
+        @BindView(R.id.addRecipeFormLabel)
         TextView addRecipeHeaderLabel;
     }
 }

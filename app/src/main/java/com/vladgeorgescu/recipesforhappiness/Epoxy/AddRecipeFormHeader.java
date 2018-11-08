@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.widget.EditText;
 
+import com.airbnb.epoxy.EpoxyAttribute;
 import com.airbnb.epoxy.EpoxyModelClass;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.vladgeorgescu.recipesforhappiness.R;
@@ -12,28 +13,22 @@ import com.vladgeorgescu.recipesforhappiness.R;
 import butterknife.BindView;
 
 @EpoxyModelClass(layout = R.layout.add_new_recipe_header)
-public class AddRecipeHeaderEpoxyModel extends EpoxyModelWithHolder<AddRecipeHeaderEpoxyModel.AddRecipeHeaderHolder> {
+public class AddRecipeFormHeader extends EpoxyModelWithHolder<AddRecipeFormHeader.AddRecipeFormHeaderHolder> {
 
-    String recipeName;
-    String recipeUrl;
-    boolean textPresent;
-    private int spanSize;
+    @EpoxyAttribute String recipeName;
+    @EpoxyAttribute String recipeURL;
+
 
     @Override
-    protected AddRecipeHeaderHolder createNewHolder() {
-        return new AddRecipeHeaderHolder();
+    protected AddRecipeFormHeaderHolder createNewHolder() {
+        return new AddRecipeFormHeaderHolder();
     }
 
     @Override
-    public void bind(@NonNull AddRecipeHeaderHolder holder) {
+    public void bind(@NonNull AddRecipeFormHeaderHolder holder) {
         super.bind(holder);
         holder.recipeName.setText(null);
         holder.recipeUrl.setText(null);
-    }
-
-    @Override
-    public int getSpanSize(int totalSpanCount, int position, int itemCount) {
-        return spanSize;
     }
 
     @Override
@@ -42,7 +37,7 @@ public class AddRecipeHeaderEpoxyModel extends EpoxyModelWithHolder<AddRecipeHea
     }
 
 
-    class AddRecipeHeaderHolder extends BaseEpoxyHolder {
+    class AddRecipeFormHeaderHolder extends BaseEpoxyHolder {
         @BindView(R.id.recipe_name_editText)
         EditText recipeName;
         @BindView(R.id.recipe_url_editText)

@@ -27,7 +27,7 @@ public class IngredientViewAdapter extends RecyclerView.Adapter<IngredientHolder
     @Override
     public IngredientHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Log.d("IngredientViewAdapter", ".onCreateViewHolder: called");
-        View addIngredientView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.ingredient_row, viewGroup, false);
+        View addIngredientView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.add_recipe_form_cell, viewGroup, false);
         IngredientHolder ingredientHolder = new IngredientHolder(addIngredientView);
         return ingredientHolder;
     }
@@ -41,7 +41,7 @@ public class IngredientViewAdapter extends RecyclerView.Adapter<IngredientHolder
             public void onClick(View v) {
                 Toast.makeText(context, "Add another ingredient!", Toast.LENGTH_SHORT).show();
                 Log.d("IngredientViewAdapter", "onClick: event");
-                ingredientArrayList.add(new Ingredient("", ""));
+                ingredientArrayList.add(new Ingredient(""));
                 notifyDataSetChanged();
             }
         });

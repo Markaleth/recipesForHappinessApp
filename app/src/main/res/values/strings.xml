@@ -6,7 +6,7 @@
 
     <string name="recipe_name_text_input_hint">"Name you recipe. (Required)"</string>
     <string name="recipe_url_text_input_hint">"Did you see this online? Add the URL here!"</string>
-    <string name="recipe_ingredients_text_input_hint">"Add your recipe's ingredients here.</string>
+    <string name="recipe_ingredients_text_input_hint">"Add your recipe's ingredients here."</string>
     <string name="recipe_steps_text_input_hint">"Add your preparation steps here.</string>
     <string name="recipe_preparation_steps_text_input_hint">"Add your recipe's preparation steps here."</string>
 
