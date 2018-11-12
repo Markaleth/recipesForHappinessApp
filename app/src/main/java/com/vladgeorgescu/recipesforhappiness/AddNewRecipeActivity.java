@@ -14,12 +14,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.internal.FirebaseAppHelper;
 import com.vladgeorgescu.recipesforhappiness.Epoxy.AdapterCallbacks;
 import com.vladgeorgescu.recipesforhappiness.Epoxy.AddNewRecipeController;
+import com.vladgeorgescu.recipesforhappiness.Epoxy.RecipeAdapter;
 import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.Model.Step;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,10 +32,9 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
     @BindView(R.id.add_new_recipe_recyclerView)
     EpoxyRecyclerView addRecipeRecyclerView;
 
-    private AddNewRecipeController addNewRecipeController = new AddNewRecipeController(this);
-
-    private List<Recipe> recipes;
-    private Recipe recipe;
+    private Recipe recipe = new Recipe();
+    private RecipeAdapter recipeAdapter = new RecipeAdapter(this, recipe);
+    private AddNewRecipeController addNewRecipeController;
     private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
     private ArrayList<Step> recipeSteps = new ArrayList<>();
 
@@ -52,13 +51,15 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
 
         ButterKnife.bind(this);
 
-
         initiateToolbar();
         ingredientsAndStepsInit();
-        updateController();
+        addNewRecipeController = new AddNewRecipeController(this, recipe);
+//        recipeAdapter.setData(recipe);
+        addNewRecipeController.setData(recipe);
 
         addRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         addRecipeRecyclerView.setController(addNewRecipeController);
+//        addRecipeRecyclerView.setAdapter(recipeAdapter);
 
         //Initialize Firebase objects
         database = FirebaseDatabase.getInstance();
@@ -77,9 +78,9 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
 
     @Override
     public void onAddIngredient() {
-//        this.recipeIngredients.add(new Ingredient(null));
-        this.recipe.setRecipeIngredients(new Ingredient(null));
+        recipe.setRecipeIngredients(new Ingredient(null));
         updateController();
+//        addNewRecipeController.requestModelBuild();
         Toast.makeText(this, "Add new ingredient button clicked!", Toast.LENGTH_SHORT).show();
     }
 
@@ -91,7 +92,10 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
     }
 
     public void updateController() {
-        addNewRecipeController.setData(this.recipe);
+        RecipeAdapter newRecipeAdapter = new RecipeAdapter(this, recipe);
+        newRecipeAdapter.setData(this.recipe);
+        addRecipeRecyclerView.setAdapter(newRecipeAdapter);
+
 
     }
 

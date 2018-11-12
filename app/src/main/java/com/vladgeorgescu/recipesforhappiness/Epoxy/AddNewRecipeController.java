@@ -25,42 +25,34 @@ public class AddNewRecipeController extends TypedEpoxyController<Recipe> {
     @AutoModel
     AddNewRecipeFormCell_ stepCell;
 
-
     private AdapterCallbacks callbacks;
+    private Recipe recipe;
 
-    public AddNewRecipeController(AdapterCallbacks callbacks) {
+    public AddNewRecipeController(AdapterCallbacks callbacks, Recipe recipe) {
         super(getAsyncBackgroundHandler(), getAsyncBackgroundHandler());
         this.callbacks = callbacks;
+        this.recipe = recipe;
         setDebugLoggingEnabled(true);
+        setData(recipe);
+
     }
 
     @Override
     protected void buildModels(Recipe recipe) {
-        addRecipeLabel.labelText(R.string.recipe_name);
-        addRecipeLabel.addTo(this);
-
-        addRecipeHeaderEpoxyModel.addTo(this);
-
-        ingredientLabel.labelText(R.string.ingredients_label);
-        ingredientLabel.addTo(this);
+        add(addRecipeLabel.labelText(R.string.recipes_screen_label));
+        add(addRecipeHeaderEpoxyModel);
+        add(ingredientLabel.labelText(R.string.ingredients_label));
         for (Ingredient ingredient : recipe.getRecipeIngredients()) {
-            ingredientCell.hintText(R.string.recipe_ingredients_text_input_hint);
-            ingredientCell.ingredientFabOnClickListener((model, parentView, clickedView, position) -> {
-                callbacks.onAddIngredient();
-            });
-            ingredientCell.addTo(this);
+            add(ingredientCell
+                    .hintText(R.string.recipe_ingredients_text_input_hint)
+                    .ingredientFabOnClickListener((model, parentView, clickedView, position) -> {
+                        callbacks.onAddIngredient();
+                    }));
         }
-
-        stepLabel.labelText(R.string.steps_label);
-        stepLabel.addTo(this);
+        add(stepLabel.labelText(R.string.steps_label));
         for (Step step : recipe.getRecipeSteps()) {
-            stepCell.hintText(R.string.recipe_steps_text_input_hint);
-            stepCell.ingredientFabOnClickListener((model, parentView, clickedView, position) -> {
-                callbacks.onAddIngredient();
-            });
-            stepCell.addTo(this);
+            add(stepCell.hintText(R.string.recipe_steps_text_input_hint));
         }
-
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.vladgeorgescu.recipesforhappiness.Epoxy;
 
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +22,8 @@ import static com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash;
 @EpoxyModelClass(layout = R.layout.add_recipe_form_cell)
 public class AddNewRecipeFormCell extends EpoxyModelWithHolder<AddNewRecipeFormCell.FormCellHolder> {
 
-    @EpoxyAttribute @StringRes int hintText;
+    @EpoxyAttribute @StringRes @Nullable
+    int hintText;
     @EpoxyAttribute(DoNotHash) OnClickListener ingredientFabOnClickListener;
 
     @Override
