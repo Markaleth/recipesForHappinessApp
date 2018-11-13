@@ -41,7 +41,7 @@ public class RecipeAdapter extends EpoxyAdapter {
         for (Ingredient ingredient : recipe.getRecipeIngredients()) {
             models.add(new AddNewRecipeFormCell_()
                     .hintText(R.string.recipe_ingredients_text_input_hint)
-                    .ingredientFabOnClickListener((model, parentView, clickedView, position) -> {
+                    .cellFabOnClickListener((model, parentView, clickedView, position) -> {
                         callbacks.onAddIngredient();
                     }));
         }

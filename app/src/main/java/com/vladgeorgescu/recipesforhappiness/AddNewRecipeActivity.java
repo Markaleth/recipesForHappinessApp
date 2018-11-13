@@ -14,7 +14,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.internal.FirebaseAppHelper;
 import com.vladgeorgescu.recipesforhappiness.Epoxy.AdapterCallbacks;
 import com.vladgeorgescu.recipesforhappiness.Epoxy.AddNewRecipeController;
-import com.vladgeorgescu.recipesforhappiness.Epoxy.RecipeAdapter;
 import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.Model.Step;
@@ -33,9 +32,7 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
     EpoxyRecyclerView addRecipeRecyclerView;
 
     private Recipe recipe = new Recipe();
-    private RecipeAdapter recipeAdapter = new RecipeAdapter(this, recipe);
     private AddNewRecipeController addNewRecipeController;
-    private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
     private ArrayList<Step> recipeSteps = new ArrayList<>();
 
 
@@ -78,30 +75,30 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
 
     @Override
     public void onAddIngredient() {
-        recipe.setRecipeIngredients(new Ingredient(null));
+        recipe.setRecipeIngredients(new Ingredient(null, recipe.getRecipeIngredients().size()));
         updateController();
-//        addNewRecipeController.requestModelBuild();
         Toast.makeText(this, "Add new ingredient button clicked!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAddStep() {
-        this.recipeSteps.add(new Step(null));
+        recipe.setRecipeSteps(new Step(null, recipe.getRecipeIngredients().size()));
         updateController();
         Toast.makeText(this, "Add new step button clicked!", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void saveRecipe() {
+        Toast.makeText(this, "Recipe saved!", Toast.LENGTH_SHORT).show();
+    }
+
     public void updateController() {
-        RecipeAdapter newRecipeAdapter = new RecipeAdapter(this, recipe);
-        newRecipeAdapter.setData(this.recipe);
-        addRecipeRecyclerView.setAdapter(newRecipeAdapter);
-
-
+        addNewRecipeController.setData(recipe);
     }
 
     public void ingredientsAndStepsInit() {
         this.recipe = new Recipe();
-        this.recipe.setRecipeIngredients(new Ingredient(null));
-        this.recipe.setRecipeSteps(new Step(null));
+        this.recipe.setRecipeIngredients(new Ingredient(null, recipe.getRecipeIngredients().size()));
+        this.recipe.setRecipeSteps(new Step(null, recipe.getRecipeSteps().size()));
     }
 }

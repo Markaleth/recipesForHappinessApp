@@ -1,14 +1,23 @@
 package com.vladgeorgescu.recipesforhappiness.Model;
 
-public class Ingredient {
+import android.os.Parcel;
+import android.os.Parcelable;
 
+public class Ingredient implements Parcelable {
+
+    private final long id;
     private String name;
-    private String quantity;
 
-    public Ingredient(String name){
+    public Ingredient(String name, long id){
         this.name = name;
+        this.id = id;
     }
 
+
+    private Ingredient(Parcel in) {
+        name = in.readString();
+        id = in.readLong();
+    }
 
     public String getName() {
         return name;
@@ -18,12 +27,30 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public long getId() {
+        return id;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeLong(id);
+    }
+
+    public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
+        @Override
+        public Ingredient createFromParcel(Parcel in) {
+            return new Ingredient(in);
+        }
+
+        @Override
+        public Ingredient[] newArray(int size) {
+            return new Ingredient[size];
+        }
+    };
 }

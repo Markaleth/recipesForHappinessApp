@@ -41,7 +41,7 @@ public class IngredientViewAdapter extends RecyclerView.Adapter<IngredientHolder
             public void onClick(View v) {
                 Toast.makeText(context, "Add another ingredient!", Toast.LENGTH_SHORT).show();
                 Log.d("IngredientViewAdapter", "onClick: event");
-                ingredientArrayList.add(new Ingredient(""));
+//                ingredientArrayList.add(new Ingredient(""));
                 notifyDataSetChanged();
             }
         });
