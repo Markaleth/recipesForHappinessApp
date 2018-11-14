@@ -3,7 +3,7 @@ package com.vladgeorgescu.recipesforhappiness.Epoxy;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.airbnb.epoxy.EpoxyAttribute;
 import com.airbnb.epoxy.EpoxyModelClass;
@@ -12,10 +12,12 @@ import com.vladgeorgescu.recipesforhappiness.R;
 
 import butterknife.BindView;
 
+import static com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash;
+
 @EpoxyModelClass(layout = R.layout.save_recipe_fab)
 public class SaveRecipeFabModel extends EpoxyModelWithHolder<SaveRecipeFabModel.SaveRecipeFabHolder> {
-    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    View.OnClickListener saveRecipeClickListener;
+    @EpoxyAttribute(DoNotHash)
+    OnClickListener saveRecipeClickListener;
 
     @Override
     protected SaveRecipeFabHolder createNewHolder() {

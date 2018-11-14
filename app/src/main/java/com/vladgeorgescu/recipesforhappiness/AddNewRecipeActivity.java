@@ -89,6 +89,20 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
 
     @Override
     public void saveRecipe() {
+        Recipe recipe = new Recipe();
+
+//
+//
+//        recipe.setRecipeName(recipeNameTextView.getText().toString());
+//        recipe.setRecipeUrl(recipeUrlTextView.getText().toString());
+
+//                recipe.setRecipeIngredients(ingredientsRecyclerViewAdapter.getIngredientArrayList())
+
+//        mFirebaseReference.push().setValue(recipe);
+
+//                Clear input text
+//        recipeNameTextView.setText("");
+//        recipeUrlTextView.setText("");
         Toast.makeText(this, "Recipe saved!", Toast.LENGTH_SHORT).show();
     }
 
