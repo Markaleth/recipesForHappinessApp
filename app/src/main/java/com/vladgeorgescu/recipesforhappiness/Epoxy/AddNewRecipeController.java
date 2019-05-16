@@ -9,6 +9,9 @@ import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.Model.Step;
 import com.vladgeorgescu.recipesforhappiness.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.airbnb.epoxy.EpoxyAsyncUtil.getAsyncBackgroundHandler;
 
 public class AddNewRecipeController extends TypedEpoxyController<Recipe> {
@@ -48,11 +51,11 @@ public class AddNewRecipeController extends TypedEpoxyController<Recipe> {
                     .hintText(R.string.recipe_ingredients_text_input_hint)
                     .cellFabOnClickListener((model, parentView, clickedView, position) -> {
                         callbacks.onAddIngredient();
-                    }));
+                    })
+            );
         }
 
         add(stepLabel.labelText(R.string.steps_label));
-
         for (int i = 0; i < recipe.getRecipeSteps().size(); i++) {
             Step step = recipe.getRecipeSteps().get(i);
 
@@ -67,7 +70,6 @@ public class AddNewRecipeController extends TypedEpoxyController<Recipe> {
         add(saveRecipeFab.saveRecipeClickListener((model, parentView, clickedView, position) -> {
             callbacks.saveRecipe();
         }));
-
     }
 
 
@@ -75,6 +77,57 @@ public class AddNewRecipeController extends TypedEpoxyController<Recipe> {
     protected void onExceptionSwallowed(@NonNull RuntimeException exception) {
         throw exception;
     }
+
+    public boolean isIngredient() {
+        boolean isIngredient = false;
+        AddNewRecipeFormCell ingredient;
+        AddNewRecipeFormCell cell = null;
+        AddNewRecipeFormCell step;
+        for (int i = 0; i < getAdapter().getItemCount(); i++) {
+            if (getAdapter().getModelAtPosition(i).getLayout() == R.layout.add_recipe_form_cell) {
+                cell = (AddNewRecipeFormCell) getAdapter().getModelAtPosition(i);
+                if (cell.getHintText() == R.string.recipe_ingredients_text_input_hint) {
+                    isIngredient = true;
+                } else if (cell.getHintText() == R.string.recipe_steps_text_input_hint) {
+                    isIngredient = false;
+                }
+            }
+        }
+        return isIngredient;
+    }
+
+    public List<Ingredient> getIngredients() {
+        AddNewRecipeFormCell cell;
+        List<Ingredient> ingredients = new ArrayList<>();
+        for (int i = 0; i < getAdapter().getItemCount(); i++) {
+            if (isIngredient()) {
+                cell = (AddNewRecipeFormCell) getAdapter().getModelAtPosition(i);
+                ingredients.add(new Ingredient(cell.getCellText(), recipe.getRecipeIngredients().size()));
+            }
+        }
+        return ingredients;
+    }
+
+    public List<Step> getSteps() {
+        AddNewRecipeFormCell cell;
+        List<Step> steps = new ArrayList<>();
+        for (int i = 0; i < getAdapter().getItemCount(); i++) {
+            if (!isIngredient()) {
+                cell = (AddNewRecipeFormCell) getAdapter().getModelAtPosition(i);
+                steps.add(new Step(cell.getCellText(), recipe.getRecipeSteps().size()));
+            }
+        }
+        return steps;
+    }
+
+    public String getRecipeNameText() {
+        return addRecipeHeaderEpoxyModel.getRecipeURL();
+    }
+
+    public String getRecipeUrlText(){
+        return addRecipeHeaderEpoxyModel.getRecipeURL();
+    }
+
 }
 
 

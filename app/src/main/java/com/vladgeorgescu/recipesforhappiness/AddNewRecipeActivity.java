@@ -3,22 +3,17 @@ package com.vladgeorgescu.recipesforhappiness;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.airbnb.epoxy.EpoxyRecyclerView;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.internal.FirebaseAppHelper;
 import com.vladgeorgescu.recipesforhappiness.Epoxy.AdapterCallbacks;
 import com.vladgeorgescu.recipesforhappiness.Epoxy.AddNewRecipeController;
+import com.vladgeorgescu.recipesforhappiness.FirebaseUtils.FirebaseHandler;
 import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.Model.Step;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,14 +27,9 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
     EpoxyRecyclerView addRecipeRecyclerView;
 
     private Recipe recipe = new Recipe();
-    private AddNewRecipeController addNewRecipeController;
-    private ArrayList<Step> recipeSteps = new ArrayList<>();
+    private AddNewRecipeController addNewRecipeController = new AddNewRecipeController(this, recipe);
 
-
-    private FirebaseDatabase database;
-    private DatabaseReference mFirebaseReference;
-    private ChildEventListener mChildEventListener;
-    private FirebaseAppHelper firebaseHelper;
+    private FirebaseHandler firebaseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +37,19 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
         setContentView(R.layout.activity_add_new_recipe);
 
         ButterKnife.bind(this);
+        firebaseHandler = new FirebaseHandler();
 
         initiateToolbar();
         ingredientsAndStepsInit();
-        addNewRecipeController = new AddNewRecipeController(this, recipe);
-//        recipeAdapter.setData(recipe);
-        addNewRecipeController.setData(recipe);
+        updateController();
 
-        addRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        addRecipeRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        addRecipeRecyclerView.setAdapter(addNewRecipeController.getAdapter());
         addRecipeRecyclerView.setController(addNewRecipeController);
 //        addRecipeRecyclerView.setAdapter(recipeAdapter);
 
         //Initialize Firebase objects
-        database = FirebaseDatabase.getInstance();
-        mFirebaseReference = database.getReference().child("recipe");
+        firebaseHandler.getFirebaseDatabase().getReference().child("recipe");
     }
 
     private void initiateToolbar() {
@@ -89,22 +78,19 @@ public class AddNewRecipeActivity extends AppCompatActivity implements AdapterCa
 
     @Override
     public void saveRecipe() {
-        Recipe recipe = new Recipe();
+        recipe.setRecipeName(addNewRecipeController.getRecipeNameText());
+        recipe.setRecipeUrl(addNewRecipeController.getRecipeUrlText());
+        for (Ingredient ingredient : addNewRecipeController.getIngredients()){
+            recipe.setRecipeIngredients(ingredient);
+        }
+        for (Step step : addNewRecipeController.getSteps()){
+            recipe.setRecipeSteps(step);
+        }
 
-//
-//
-//        recipe.setRecipeName(recipeNameTextView.getText().toString());
-//        recipe.setRecipeUrl(recipeUrlTextView.getText().toString());
-
-//                recipe.setRecipeIngredients(ingredientsRecyclerViewAdapter.getIngredientArrayList())
-
-//        mFirebaseReference.push().setValue(recipe);
-
-//                Clear input text
-//        recipeNameTextView.setText("");
-//        recipeUrlTextView.setText("");
+        firebaseHandler.getFirebaseReference().push().setValue(recipe);
         Toast.makeText(this, "Recipe saved!", Toast.LENGTH_SHORT).show();
     }
+
 
     public void updateController() {
         addNewRecipeController.setData(recipe);

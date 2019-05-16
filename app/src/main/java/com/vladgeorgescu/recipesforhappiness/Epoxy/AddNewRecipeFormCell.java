@@ -26,6 +26,7 @@ public class AddNewRecipeFormCell extends EpoxyModelWithHolder<AddNewRecipeFormC
     int hintText;
     @EpoxyAttribute(DoNotHash)
     OnClickListener cellFabOnClickListener;
+    EditText cellText;
 
     @Override
     protected FormCellHolder createNewHolder() {
@@ -36,11 +37,20 @@ public class AddNewRecipeFormCell extends EpoxyModelWithHolder<AddNewRecipeFormC
     public void bind(@NonNull final FormCellHolder holder) {
         holder.cellName.setHint(hintText);
         holder.addCellFab.setOnClickListener(cellFabOnClickListener);
+        cellText = holder.cellName;
     }
 
     @Override
     protected int getDefaultLayout() {
         return R.layout.add_recipe_form_cell;
+    }
+
+    public int getHintText() {
+        return hintText;
+    }
+
+    public String getCellText() {
+        return cellText.getText().toString();
     }
 
     class FormCellHolder extends BaseEpoxyHolder {

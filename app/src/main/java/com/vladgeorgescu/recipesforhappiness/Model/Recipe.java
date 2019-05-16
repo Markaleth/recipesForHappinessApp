@@ -1,7 +1,6 @@
 package com.vladgeorgescu.recipesforhappiness.Model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vladadoreme on 26/02/2018.
@@ -15,6 +14,9 @@ public class Recipe {
     private ArrayList<Step> recipeSteps = new ArrayList<>();
 
     public Recipe(){
+        Recipe recipe = new Recipe();
+        recipe.setRecipeIngredients(new Ingredient(null, recipe.getRecipeIngredients().size()));
+        recipe.setRecipeSteps(new Step(null, recipe.getRecipeSteps().size()));
     }
 
     private static int lastRecipeId = 0;
