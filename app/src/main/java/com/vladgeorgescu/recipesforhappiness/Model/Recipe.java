@@ -14,9 +14,6 @@ public class Recipe {
     private ArrayList<Step> recipeSteps = new ArrayList<>();
 
     public Recipe(){
-        Recipe recipe = new Recipe();
-        recipe.setRecipeIngredients(new Ingredient(null, recipe.getRecipeIngredients().size()));
-        recipe.setRecipeSteps(new Step(null, recipe.getRecipeSteps().size()));
     }
 
     private static int lastRecipeId = 0;

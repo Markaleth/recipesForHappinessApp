@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/AddRecipeScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorSecondary_Light"
-    android:fillViewport="true"
-    android:scrollbarStyle="insideInset"
     tools:context="com.vladgeorgescu.recipesforhappiness.AddNewRecipeActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/add_recipe_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/add_new_recipe_creation" />
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/add_new_recipe_recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_recipe_toolbar" />
+    <com.vladgeorgescu.recipesforhappiness.ViewModels.NewRecipeHeaderView
+        android:id="@+id/recipeHeader"
+        layout = "@layout/view_new_recipe_header"
+        android:layout_below="@id/add_recipe_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recipe_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recipeHeader"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_recipe_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:tint="@color/colorSecondary_Light"
+        app:backgroundTint="@color/colorSecondary"
+        app:elevation="5dp"
+        android:layout_below="@id/recipe_contents"
+        android:layout_alignEnd="@id/recipe_contents"
+
+        app:srcCompat="@drawable/fui_done_check_mark" />
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

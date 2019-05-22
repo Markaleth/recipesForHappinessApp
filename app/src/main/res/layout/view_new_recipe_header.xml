@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recipeHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_bg"
+    android:layout_margin="8dp">
+
+    <EditText
+        android:id="@+id/recipe_name_editText"
+        style="@android:style/Widget.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/recipe_name_text_input_hint"
+        android:inputType="text"
+        android:textAppearance="@style/TextAppearance.Design.Hint"
+        android:textColor="@color/colorSecondary"
+        android:textColorHint="@color/colorSecondary"
+        android:textSize="14sp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/recipe_url_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recipe_name_editText"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/recipe_url_text_input_hint"
+        android:inputType="text|textUri"
+        android:textColor="@color/colorSecondary"
+        android:textColorHint="@color/colorSecondary"
+        android:textSize="14sp"
+        android:textStyle="italic" />
+</RelativeLayout>
