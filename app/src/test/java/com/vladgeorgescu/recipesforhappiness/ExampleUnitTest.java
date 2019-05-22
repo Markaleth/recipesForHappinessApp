@@ -1,7 +1,5 @@
 package com.vladgeorgescu.recipesforhappiness;
 
-import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;

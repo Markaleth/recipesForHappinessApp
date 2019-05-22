@@ -1,10 +1,8 @@
-package com.vladgeorgescu.recipesforhappiness.ViewModels;
+package com.vladgeorgescu.recipesforhappiness.viewModels;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 

@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.Adapters.Step;
+package com.vladgeorgescu.recipesforhappiness.adapters.Step;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;

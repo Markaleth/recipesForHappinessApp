@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.Adapters.Ingredient;
+package com.vladgeorgescu.recipesforhappiness.adapters.Ingredient;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.vladgeorgescu.recipesforhappiness.Model.Ingredient;
+import com.vladgeorgescu.recipesforhappiness.model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.R;
 
 import java.util.ArrayList;

@@ -1,24 +1,24 @@
-package com.vladgeorgescu.recipesforhappiness.FirebaseUtils;
+package com.vladgeorgescu.recipesforhappiness.apiUtils;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class FirebaseHandler {
+public class ApiServiceImplementation implements ApiServiceInterface {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
     private ChildEventListener firebaseChildEventListener;
     private DatabaseReference firebaseReference;
     private FirebaseDatabase firebaseDatabase;
 
-    public FirebaseHandler (){
+    public ApiServiceImplementation (){
         this.firebaseDatabase = FirebaseDatabase.getInstance();
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.firebaseReference = firebaseDatabase.getReference().child("recipe");
     }
 
-    public FirebaseAuth getFirebaseAuth() {
+    public FirebaseAuth getAuth() {
         return firebaseAuth;
     }
 
@@ -26,23 +26,23 @@ public class FirebaseHandler {
         this.firebaseAuth = mFirebaseAuth;
     }
 
-    public FirebaseAuth.AuthStateListener getFirebaseAuthStateListener() {
+    public FirebaseAuth.AuthStateListener getAuthStateListener() {
         return firebaseAuthStateListener;
     }
 
-    public void setFirebaseAuthStateListener(FirebaseAuth.AuthStateListener firebaseAuthStateListener) {
+    public void setAuthStateListener(FirebaseAuth.AuthStateListener firebaseAuthStateListener) {
         this.firebaseAuthStateListener = firebaseAuthStateListener;
     }
 
-    public ChildEventListener getFirebaseChildEventListener() {
+    public ChildEventListener getChildEventListener() {
         return firebaseChildEventListener;
     }
 
-    public void setFirebaseChildEventListener(ChildEventListener firebaseChildEventListener) {
+    public void setChildEventListener(ChildEventListener firebaseChildEventListener) {
         this.firebaseChildEventListener = firebaseChildEventListener;
     }
 
-    public DatabaseReference getFirebaseReference() {
+    public DatabaseReference getReference() {
         return firebaseReference;
     }
 
@@ -50,11 +50,12 @@ public class FirebaseHandler {
         this.firebaseReference = firebaseReference;
     }
 
-    public FirebaseDatabase getFirebaseDatabase() {
+    public FirebaseDatabase getDatabase() {
         return firebaseDatabase;
     }
 
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
         this.firebaseDatabase = firebaseDatabase;
     }
+
 }

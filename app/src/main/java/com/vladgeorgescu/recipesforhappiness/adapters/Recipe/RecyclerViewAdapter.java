@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.Adapters.Recipe;
+package com.vladgeorgescu.recipesforhappiness.adapters.Recipe;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,9 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vladgeorgescu.recipesforhappiness.Model.Recipe;
+import com.vladgeorgescu.recipesforhappiness.model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +20,9 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecipeHolder> {
 
     private Context recyclerViewContext;
-    private List<Recipe> recipes;
+    private ArrayList<Recipe> recipes;
 
-    public RecyclerViewAdapter(Context context, List<Recipe> recipes) {
+    public RecyclerViewAdapter(Context context, ArrayList<Recipe> recipes) {
         this.recyclerViewContext = context;
         this.recipes = recipes;
     }
@@ -39,7 +40,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecipeHolder> {
         Recipe recipe = recipes.get(position);
         //Populate cards with whatever element you want from the model
         holder.getRecipeName().setText(recipe.getRecipeName());
-
     }
 
     @Override
@@ -53,8 +53,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecipeHolder> {
             else {
                 count = recipes.size();
             }
-        } catch (Exception e){}
+        } catch (Exception ignored){}
         return count;
+    }
+
+    public void updateItemList(final ArrayList<Recipe> itemList){
+        this.recipes = itemList;
+        notifyDataSetChanged();
     }
 
 }

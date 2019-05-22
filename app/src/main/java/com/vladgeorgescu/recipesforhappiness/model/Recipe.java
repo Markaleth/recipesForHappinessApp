@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.Model;
+package com.vladgeorgescu.recipesforhappiness.model;
 
 import java.util.ArrayList;
 
@@ -15,8 +15,6 @@ public class Recipe {
 
     public Recipe(){
     }
-
-    private static int lastRecipeId = 0;
 
     public String getRecipeName() {
         return recipeName;
