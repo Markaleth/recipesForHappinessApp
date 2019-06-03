@@ -9,16 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.vladgeorgescu.recipesforhappiness.model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.R;
 
 import java.util.ArrayList;
 
 public class IngredientViewAdapter extends RecyclerView.Adapter<IngredientHolder> {
-    private ArrayList<Ingredient> ingredientArrayList;
+    private ArrayList<String> ingredientArrayList;
     private Context context;
 
-    public IngredientViewAdapter(ArrayList<Ingredient> ingredientArrayList, Context context) {
+    public IngredientViewAdapter(ArrayList<String> ingredientArrayList, Context context) {
         this.ingredientArrayList = ingredientArrayList;
         this.context = context;
     }
@@ -53,7 +52,7 @@ public class IngredientViewAdapter extends RecyclerView.Adapter<IngredientHolder
         return ingredientArrayList.size();
     }
 
-    public ArrayList<Ingredient> getIngredientArrayList() {
+    public ArrayList<String> getIngredientArrayList() {
         return ingredientArrayList;
     }
 }

@@ -17,7 +17,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/add_new_recipe_creation" />
 
-    <com.vladgeorgescu.recipesforhappiness.viewModels.NewRecipeHeaderView
+    <com.vladgeorgescu.recipesforhappiness.viewModel.NewRecipeHeaderView
         android:id="@+id/recipeHeader"
         layout = "@layout/view_new_recipe_header"
         android:layout_below="@id/add_recipe_toolbar"

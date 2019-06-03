@@ -10,8 +10,8 @@ public class Recipe {
 
     private String recipeName;
     private String recipeUrl;
-    private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
-    private ArrayList<Step> recipeSteps = new ArrayList<>();
+    private ArrayList<String> recipeIngredients = new ArrayList<>();
+    private ArrayList<String> recipeSteps = new ArrayList<>();
 
     public Recipe(){
     }
@@ -32,22 +32,20 @@ public class Recipe {
         this.recipeUrl = recipeUrl;
     }
 
-    public ArrayList<Ingredient> getRecipeIngredients() {
+    public ArrayList<String> getRecipeIngredients() {
         return recipeIngredients;
     }
 
-    public ArrayList<Ingredient> setRecipeIngredients(Ingredient ingredient) {
-        this.recipeIngredients.add(ingredient);
-        return recipeIngredients;
+    public void setRecipeIngredients(ArrayList<String> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
-    public ArrayList<Step> getRecipeSteps() {
+    public ArrayList<String> getRecipeSteps() {
         return recipeSteps;
     }
 
-    public ArrayList<Step> setRecipeSteps(Step step) {
-        this.recipeSteps.add(step);
-        return recipeSteps;
+    public void setRecipeSteps(ArrayList<String> recipeSteps) {
+        this.recipeSteps = recipeSteps;
     }
 }
 

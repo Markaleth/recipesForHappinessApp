@@ -7,9 +7,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceImplementation;
 import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceInterface;
-import com.vladgeorgescu.recipesforhappiness.model.Ingredient;
 import com.vladgeorgescu.recipesforhappiness.model.Recipe;
-import com.vladgeorgescu.recipesforhappiness.model.Step;
 
 import butterknife.ButterKnife;
 
@@ -38,7 +36,6 @@ public class AddNewRecipeActivity extends AppCompatActivity {
 //        addRecipeRecyclerView.setAdapter(recipeAdapter);
 
         //Initialize Firebase objects
-        apiService.getDatabase().getReference().child("recipe");
     }
 
     private void initiateToolbar() {

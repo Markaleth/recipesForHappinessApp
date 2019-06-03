@@ -4,20 +4,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.vladgeorgescu.recipesforhappiness.model.Recipe;
+
+import java.util.List;
 
 public interface ApiServiceInterface {
 
-    FirebaseAuth getAuth();
 
-    FirebaseAuth.AuthStateListener getAuthStateListener();
+    void detachDatabaseReadListener();
 
-    void setAuthStateListener(FirebaseAuth.AuthStateListener firebaseAuthStateListener);
+    List<Recipe> getRecipeList();
 
-    ChildEventListener getChildEventListener();
+    void attachDatabaseReadListener();
 
-    void setChildEventListener(ChildEventListener firebaseChildEventListener);
+    void attachValueEventListener();
 
-    DatabaseReference getReference();
-
-    FirebaseDatabase getDatabase();
 }

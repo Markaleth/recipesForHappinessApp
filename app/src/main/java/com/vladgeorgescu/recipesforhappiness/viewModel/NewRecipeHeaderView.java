@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.viewModels;
+package com.vladgeorgescu.recipesforhappiness.viewModel;
 
 import android.content.Context;
 import android.util.AttributeSet;

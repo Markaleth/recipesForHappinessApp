@@ -19,19 +19,16 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecipeHolder> {
 
-    private Context recyclerViewContext;
-    private ArrayList<Recipe> recipes;
+    private List<Recipe> recipes;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Recipe> recipes) {
-        this.recyclerViewContext = context;
+    public RecyclerViewAdapter(List<Recipe> recipes) {
         this.recipes = recipes;
     }
 
     @NonNull
     @Override
     public RecipeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View myCreationsView = LayoutInflater.from(recyclerViewContext).inflate(R.layout.recipies_row, parent, false);
-
+        View myCreationsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipies_row, parent, false);
         return new RecipeHolder(myCreationsView);
     }
 
@@ -57,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecipeHolder> {
         return count;
     }
 
-    public void updateItemList(final ArrayList<Recipe> itemList){
+    public void updateItemList(final List<Recipe> itemList){
         this.recipes = itemList;
         notifyDataSetChanged();
     }
