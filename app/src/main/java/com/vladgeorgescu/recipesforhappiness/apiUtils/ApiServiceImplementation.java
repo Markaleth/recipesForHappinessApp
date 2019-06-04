@@ -1,5 +1,6 @@
 package com.vladgeorgescu.recipesforhappiness.apiUtils;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -18,34 +19,14 @@ public class ApiServiceImplementation implements ApiServiceInterface {
     private ChildEventListener firebaseChildEventListener;
     private DatabaseReference firebaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private List<Recipe> recipeList= new ArrayList<>();
+    private MutableLiveData<List<Recipe>> recipeListMutableLiveData = new MutableLiveData<List<Recipe>>();
+    private ApiServiceInterface apiService;
+    private List<Recipe> recipeList;
 
-    private String mUsername;
 
     public ApiServiceImplementation() {
         this.firebaseDatabase = FirebaseDatabase.getInstance();
         this.firebaseReference = firebaseDatabase.getReference().child("recipe");
-        attachDatabaseReadListener();
-    }
-
-    private ValueEventListener listenerInit() {
-        return new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                recipeList = new ArrayList<>();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Recipe recipe = dataSnapshot1.getValue(Recipe.class);
-                    recipeList.add(recipe);
-                }
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                recipeList = new ArrayList<>();
-                Log.w("DATABASE READ CANCELED", "Failed to read values.", databaseError.toException());
-            }
-        };
     }
 
     private ChildEventListener getChildEventListener() {
@@ -57,10 +38,6 @@ public class ApiServiceImplementation implements ApiServiceInterface {
     }
 
 
-    public void attachValueEventListener() {
-        firebaseReference.addValueEventListener(listenerInit());
-    }
-
 
     public void detachDatabaseReadListener() {
         if (getChildEventListener() != null) {
@@ -69,10 +46,28 @@ public class ApiServiceImplementation implements ApiServiceInterface {
         }
     }
 
-    public List<Recipe> getRecipeList() {
-        attachValueEventListener();
-        Log.d("Recipe_seize", String.valueOf(recipeList.size()));
-        return recipeList;
+    public MutableLiveData<List<Recipe>> getRecipeList() {
+        firebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot){
+                recipeList = new ArrayList<>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Recipe recipe = dataSnapshot1.getValue(Recipe.class);
+                    recipeList.add(recipe);
+                }
+                recipeListMutableLiveData.setValue(recipeList);
+                Log.d("TAG", "After attaching the listener");
+            }
+
+
+            @Override
+            public void onCancelled (@NonNull DatabaseError databaseError){
+                recipeList = new ArrayList<>();
+                recipeListMutableLiveData.setValue(recipeList);
+                Log.d("DATABASE READ CANCELED", "Failed to read values.", databaseError.toException());
+            }
+        }) ;
+        return recipeListMutableLiveData;
     }
 
     public void attachDatabaseReadListener() {
@@ -82,6 +77,7 @@ public class ApiServiceImplementation implements ApiServiceInterface {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                    Log.d("RECIPE_NAME", recipe.getRecipeName());
                 }
 
                 @Override

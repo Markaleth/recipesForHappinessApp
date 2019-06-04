@@ -20,9 +20,12 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecipeHolder> {
 
     private List<Recipe> recipes;
+    private Context recyclerViewContext;
 
-    public RecyclerViewAdapter(List<Recipe> recipes) {
+    public RecyclerViewAdapter(Context context, List<Recipe> recipes) {
+        this.recyclerViewContext = context;
         this.recipes = recipes;
+
     }
 
     @NonNull

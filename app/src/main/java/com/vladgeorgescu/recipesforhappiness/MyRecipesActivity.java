@@ -52,14 +52,15 @@ public class MyRecipesActivity extends AppCompatActivity {
         recipesViewModel = new MyRecipesViewModel();
         recipesViewModel.init();
 
-        recyclerViewAdapter = new RecyclerViewAdapter(recipesViewModel.getRecipes().getValue());
+        observeRecipesResponse();
+        recyclerViewAdapter = new RecyclerViewAdapter(this, recipesViewModel.getRecipes().getValue());
 
         RecyclerView.LayoutManager recycler = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(recycler);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        observeRecipesResponse();
+
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 

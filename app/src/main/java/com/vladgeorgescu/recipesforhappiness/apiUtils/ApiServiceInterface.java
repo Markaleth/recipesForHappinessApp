@@ -1,5 +1,7 @@
 package com.vladgeorgescu.recipesforhappiness.apiUtils;
 
+import android.arch.lifecycle.MutableLiveData;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
@@ -13,10 +15,8 @@ public interface ApiServiceInterface {
 
     void detachDatabaseReadListener();
 
-    List<Recipe> getRecipeList();
+    MutableLiveData<List<Recipe>> getRecipeList();
 
     void attachDatabaseReadListener();
-
-    void attachValueEventListener();
 
 }
