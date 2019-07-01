@@ -1,29 +1,23 @@
 package com.vladgeorgescu.recipesforhappiness;
 
-import android.arch.lifecycle.Observer;
 import android.content.Intent;
 
 
 import android.os.Bundle;
 
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.vladgeorgescu.recipesforhappiness.adapters.Recipe.RecyclerViewAdapter;
-import com.vladgeorgescu.recipesforhappiness.model.Recipe;
 import com.vladgeorgescu.recipesforhappiness.viewModel.MyRecipesViewModel;
 
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

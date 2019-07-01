@@ -1,11 +1,9 @@
 package com.vladgeorgescu.recipesforhappiness;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.widget.Button;
-import android.widget.TextView;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

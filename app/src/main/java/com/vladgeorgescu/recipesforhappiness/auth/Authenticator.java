@@ -1,13 +1,8 @@
 package com.vladgeorgescu.recipesforhappiness.auth;
 
-import android.support.annotation.NonNull;
-
-import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceImplementation;
 import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceInterface;
-
-import java.util.Arrays;
 
 public class Authenticator {
 

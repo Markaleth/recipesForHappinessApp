@@ -7,7 +7,7 @@
     android:background="@color/colorSecondary_Light"
     tools:context="com.vladgeorgescu.recipesforhappiness.MyRecipesActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_recipes_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -18,13 +18,13 @@
         app:title="@string/recipes_screen_label" />
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/my_recipes_toolbar" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonMyCreationsTab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,13 +1,10 @@
 package com.vladgeorgescu.recipesforhappiness.viewModel;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.util.Log;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceImplementation;
 import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceInterface;
-import com.vladgeorgescu.recipesforhappiness.auth.AuthUiWrapper;
 import com.vladgeorgescu.recipesforhappiness.auth.Authenticator;
 import com.vladgeorgescu.recipesforhappiness.model.Recipe;
 

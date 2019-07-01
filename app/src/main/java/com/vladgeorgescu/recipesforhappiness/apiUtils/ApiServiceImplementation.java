@@ -1,7 +1,7 @@
 package com.vladgeorgescu.recipesforhappiness.apiUtils;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
