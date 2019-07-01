@@ -17,18 +17,22 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/add_new_recipe_creation" />
 
-    <com.vladgeorgescu.recipesforhappiness.viewModel.NewRecipeHeaderView
-        android:id="@+id/recipeHeader"
-        layout = "@layout/view_new_recipe_header"
+    <com.vladgeorgescu.recipesforhappiness.views.NewRecipeHeaderView
+        android:id="@+id/newRecipeHeaderView"
         android:layout_below="@id/add_recipe_toolbar"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/colorSecondary_Light"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:contentPadding="4dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipe_contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recipeHeader"/>
+        android:layout_below="@id/newRecipeHeaderView"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_recipe_fab"

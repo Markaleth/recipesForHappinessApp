@@ -25,7 +25,7 @@ public class MyRecipesViewModel extends ViewModel {
         initializeAuth();
     }
 
-    public void initializeAuth() {
+    private void initializeAuth() {
         authenticator.setFirebaseAuthStateListener();
         addAuthenticationStateListener();
 
