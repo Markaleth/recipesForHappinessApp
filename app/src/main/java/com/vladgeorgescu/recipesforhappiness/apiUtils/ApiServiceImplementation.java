@@ -20,7 +20,6 @@ public class ApiServiceImplementation implements ApiServiceInterface {
     private DatabaseReference firebaseReference;
     private FirebaseDatabase firebaseDatabase;
     private MutableLiveData<List<Recipe>> recipeListMutableLiveData = new MutableLiveData<List<Recipe>>();
-    private ApiServiceInterface apiService;
     private List<Recipe> recipeList;
 
 
@@ -56,7 +55,6 @@ public class ApiServiceImplementation implements ApiServiceInterface {
                     recipeList.add(recipe);
                 }
                 recipeListMutableLiveData.setValue(recipeList);
-                Log.d("TAG", "After attaching the listener");
             }
 
 
@@ -64,7 +62,6 @@ public class ApiServiceImplementation implements ApiServiceInterface {
             public void onCancelled (@NonNull DatabaseError databaseError){
                 recipeList = new ArrayList<>();
                 recipeListMutableLiveData.setValue(recipeList);
-                Log.d("DATABASE READ CANCELED", "Failed to read values.", databaseError.toException());
             }
         }) ;
         return recipeListMutableLiveData;

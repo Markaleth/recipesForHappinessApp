@@ -2,45 +2,59 @@ package com.vladgeorgescu.recipesforhappiness;
 
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceImplementation;
-import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceInterface;
-import com.vladgeorgescu.recipesforhappiness.model.Recipe;
+import com.cruxlab.sectionedrecyclerview.lib.SectionDataManager;
+import com.vladgeorgescu.recipesforhappiness.adapters.Ingredient.IngredientAdapter;
+import com.vladgeorgescu.recipesforhappiness.viewModel.AddNewRecipeViewModel;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AddNewRecipeActivity extends AppCompatActivity {
 
-    private Recipe recipe = new Recipe();
+    private LinearLayoutManager linearLayoutManager;
+    private AddNewRecipeViewModel viewModel;
+    private SectionDataManager sectionDataManager;
+    RecyclerView.Adapter adapter;
 
-    private ApiServiceInterface apiService = new ApiServiceImplementation();
+    Toolbar addNewRecipeToolbar;
+
+    @BindView(R.id.recipeContents)
+    public RecyclerView recipeContentsRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
         setContentView(R.layout.activity_add_new_recipe);
-
-        final Toolbar addNewRecipeToolbar = findViewById(R.id.add_recipe_toolbar);
-        setSupportActionBar(addNewRecipeToolbar);
-        getSupportActionBar().setTitle("Add New Recipe");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         ButterKnife.bind(this);
 
-        initiateToolbar();
-        ingredientsAndStepsInit();
-//        addRecipeRecyclerView.setAdapter(recipeAdapter);
+        addNewRecipeToolbar = findViewById(R.id.my_recipes_toolbar);
+        setSupportActionBar(addNewRecipeToolbar);
 
-        //Initialize Firebase objects
+        viewModel = new AddNewRecipeViewModel();
+        viewModel.init();
+
+        recipeContentsRecyclerView.setLayoutManager(linearLayoutManager);
+        recipeContentsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+        sectionDataManager = new SectionDataManager();
+        adapter = sectionDataManager.getAdapter();
+
+        recipeContentsRecyclerView.setAdapter(adapter);
+
+
+
+        setContentView(R.layout.activity_add_new_recipe);
+        setSupportActionBar(addNewRecipeToolbar);
+
+
     }
 
-    private void initiateToolbar() {
-    }
-
-    public void ingredientsAndStepsInit() {
-    }
 }
