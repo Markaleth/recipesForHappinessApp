@@ -28,7 +28,8 @@
                 android:textColor="@color/colorSecondary"
                 android:textColorHint="@color/colorSecondary"
                 android:textSize="14sp"
-                android:textStyle="italic" />
+                android:typeface="monospace"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/recipe_url_editText"
@@ -44,7 +45,8 @@
                 android:textColor="@color/colorSecondary"
                 android:textColorHint="@color/colorSecondary"
                 android:textSize="14sp"
-                android:textStyle="italic" />
+                android:typeface="monospace"
+                android:importantForAutofill="no" />
 
         </RelativeLayout>
 

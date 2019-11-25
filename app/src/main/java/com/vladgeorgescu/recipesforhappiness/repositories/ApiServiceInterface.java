@@ -1,8 +1,8 @@
-package com.vladgeorgescu.recipesforhappiness.apiUtils;
+package com.vladgeorgescu.recipesforhappiness.repositories;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.vladgeorgescu.recipesforhappiness.model.Recipe;
+import com.vladgeorgescu.recipesforhappiness.models.Recipe;
 
 import java.util.List;
 

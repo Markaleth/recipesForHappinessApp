@@ -14,7 +14,6 @@ import butterknife.ButterKnife;
 public class NewRecipeHeaderView extends CardView {
 
 
-
     @BindView(R.id.recipe_name_editText)
     TextView recipeNameTextView;
 

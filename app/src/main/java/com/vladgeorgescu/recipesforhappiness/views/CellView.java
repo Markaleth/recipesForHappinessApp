@@ -1,14 +1,16 @@
 package com.vladgeorgescu.recipesforhappiness.views;
 
 import android.content.Context;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.cardview.widget.CardView;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import androidx.cardview.widget.CardView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vladgeorgescu.recipesforhappiness.R;
 
 import butterknife.BindView;
@@ -29,10 +31,17 @@ public class CellView extends FrameLayout {
     FloatingActionButton addNewCellFab;
 
 
-
-    public CellView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public CellView(Context context) {
+        super(context);
         LayoutInflater.from(context).inflate(R.layout.add_recipe_form_cell, this);
         ButterKnife.bind(this);
+    }
+
+    public EditText getCellNameTextView() {
+        return cellNameTextView;
+    }
+
+    public FloatingActionButton getAddNewCellFab() {
+        return addNewCellFab;
     }
 }

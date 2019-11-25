@@ -1,8 +1,8 @@
-package com.vladgeorgescu.recipesforhappiness.auth;
+package com.vladgeorgescu.recipesforhappiness.utils;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceImplementation;
-import com.vladgeorgescu.recipesforhappiness.apiUtils.ApiServiceInterface;
+import com.vladgeorgescu.recipesforhappiness.repositories.ApiServiceImplementation;
+import com.vladgeorgescu.recipesforhappiness.repositories.ApiServiceInterface;
 
 public class Authenticator {
 

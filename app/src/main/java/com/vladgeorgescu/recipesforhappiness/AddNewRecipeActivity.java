@@ -5,28 +5,33 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
-import com.cruxlab.sectionedrecyclerview.lib.SectionDataManager;
-import com.vladgeorgescu.recipesforhappiness.adapters.Ingredient.IngredientAdapter;
-import com.vladgeorgescu.recipesforhappiness.viewModel.AddNewRecipeViewModel;
+import com.google.android.material.tabs.TabLayout;
+import com.vladgeorgescu.recipesforhappiness.adapters.SectionsPageAdapter;
+import com.vladgeorgescu.recipesforhappiness.viewModels.AddNewRecipeViewModel;
+import com.vladgeorgescu.recipesforhappiness.views.CellViewAdapter;
+import com.vladgeorgescu.recipesforhappiness.views.ItemFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL;
+
 public class AddNewRecipeActivity extends AppCompatActivity {
 
-    private LinearLayoutManager linearLayoutManager;
     private AddNewRecipeViewModel viewModel;
-    private SectionDataManager sectionDataManager;
-    RecyclerView.Adapter adapter;
-
     Toolbar addNewRecipeToolbar;
+    CellViewAdapter adapter;
 
-    @BindView(R.id.recipeContents)
-    public RecyclerView recipeContentsRecyclerView;
+
+    private SectionsPageAdapter sectionsPageAdapter;
+
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +42,15 @@ public class AddNewRecipeActivity extends AppCompatActivity {
         addNewRecipeToolbar = findViewById(R.id.my_recipes_toolbar);
         setSupportActionBar(addNewRecipeToolbar);
 
-        viewModel = new AddNewRecipeViewModel();
-        viewModel.init();
+        adapter = new CellViewAdapter();
+        adapter.items.add(0, "");
 
-        recipeContentsRecyclerView.setLayoutManager(linearLayoutManager);
-        recipeContentsRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-        sectionDataManager = new SectionDataManager();
-        adapter = sectionDataManager.getAdapter();
-
-        recipeContentsRecyclerView.setAdapter(adapter);
-
-
-
-        setContentView(R.layout.activity_add_new_recipe);
-        setSupportActionBar(addNewRecipeToolbar);
-
-
+        setupViewPager();
     }
 
+    private void setupViewPager(){
+        sectionsPageAdapter= new SectionsPageAdapter(getSupportFragmentManager());
+        sectionsPageAdapter.addFragment(new ItemFragment(), "Ingredients");
+        sectionsPageAdapter.addFragment(new ItemFragment(), "Steps");
+    }
 }

@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.auth;
+package com.vladgeorgescu.recipesforhappiness.utils;
 
 import android.content.Intent;
 

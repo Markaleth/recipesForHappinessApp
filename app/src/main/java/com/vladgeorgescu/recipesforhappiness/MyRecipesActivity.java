@@ -6,17 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.firebase.ui.auth.AuthUI;
-import com.vladgeorgescu.recipesforhappiness.adapters.Recipe.RecyclerViewAdapter;
-import com.vladgeorgescu.recipesforhappiness.viewModel.MyRecipesViewModel;
+import com.vladgeorgescu.recipesforhappiness.adapters.RecipeView;
+import com.vladgeorgescu.recipesforhappiness.models.Recipe;
+import com.vladgeorgescu.recipesforhappiness.viewModels.MyRecipesViewModel;
+import com.xwray.groupie.GroupAdapter;
 
 
 import butterknife.BindView;
@@ -25,13 +27,11 @@ import butterknife.OnClick;
 
 public class MyRecipesActivity extends AppCompatActivity {
 
-    RecyclerViewAdapter recyclerViewAdapter;
     @BindView(R.id.recipe_recyclerView)
     RecyclerView recyclerView;
 
-    Toolbar myRecipiesToolbar;
-
-    MyRecipesViewModel recipesViewModel;
+    private MyRecipesViewModel recipesViewModel;
+    private GroupAdapter groupAdapter = new GroupAdapter();
 
 
     @Override
@@ -40,27 +40,30 @@ public class MyRecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_recipes);
         ButterKnife.bind(this);
 
-        myRecipiesToolbar = findViewById(R.id.my_recipes_toolbar);
+        Toolbar myRecipiesToolbar = findViewById(R.id.my_recipes_toolbar);
         setSupportActionBar(myRecipiesToolbar);
 
         recipesViewModel = new MyRecipesViewModel();
         recipesViewModel.init();
 
         observeRecipesResponse();
-        recyclerViewAdapter = new RecyclerViewAdapter(this, recipesViewModel.getRecipes().getValue());
-
-        RecyclerView.LayoutManager recycler = new LinearLayoutManager(this);
-
-        recyclerView.setLayoutManager(recycler);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-        recyclerView.setAdapter(recyclerViewAdapter);
+        setupRecyclerView();
     }
 
 
-    private void observeRecipesResponse(){
-        recipesViewModel.getRecipes().observe(this, recipes -> recyclerViewAdapter.updateItemList(recipes));
+    private void observeRecipesResponse() {
+        recipesViewModel.getRecipes().observe(this, recipes -> {
+            groupAdapter.clear();
+            for (Recipe recipe : recipes){
+                groupAdapter.add(new RecipeView(recipe));
+            }
+        });
+    }
+
+    private void setupRecyclerView(){
+        groupAdapter = new GroupAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(groupAdapter);
     }
 
     @Override
@@ -77,7 +80,7 @@ public class MyRecipesActivity extends AppCompatActivity {
         observeRecipesResponse();
     }
 
-    @OnClick(R.id.floatingActionButtonMyCreationsTab)
+    @OnClick(R.id.addNewRecipeButton)
     public void addNewRecipe() {
         Intent intent = new Intent(this, AddNewRecipeActivity.class);
         startActivity(intent);

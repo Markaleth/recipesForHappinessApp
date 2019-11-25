@@ -1,4 +1,4 @@
-package com.vladgeorgescu.recipesforhappiness.model;
+package com.vladgeorgescu.recipesforhappiness.models;
 
 import java.util.ArrayList;
 
@@ -10,10 +10,12 @@ public class Recipe {
 
     private String recipeName;
     private String recipeUrl;
-    private ArrayList<String> recipeIngredients = new ArrayList<>();
-    private ArrayList<String> recipeSteps = new ArrayList<>();
+    private ArrayList<String> recipeIngredients;
+    private ArrayList<String> recipeSteps;
 
-    public Recipe(){
+    public Recipe() {
+        recipeIngredients = new ArrayList<>();
+        recipeSteps = new ArrayList<>();
     }
 
     public String getRecipeName() {
